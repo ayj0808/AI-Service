@@ -84,6 +84,8 @@ tools/
 ├── risk_calculator.py       # 리스크 평가 계산기
 ├── domain_adapter.py        # 도메인 특화 어댑터
 └── report_formatter.py      # 보고서 포맷팅 도구
+└── web_search.py            # 웹 검색 기능
+
 
 data/
 data/

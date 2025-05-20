@@ -86,7 +86,7 @@ class ReportFormatter:
 
 {low_priority_recommendations}
 
-## 6. 결론
+## 6. 결론 
 
 {conclusion}
 

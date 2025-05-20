@@ -106,13 +106,6 @@ class ReportGenerator:
                            domain_info: str, domain_focus: str) -> str:
         """
         보고서 서론 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            service_analysis: 서비스 분석 정보
-            domain_info: 도메인 정보
-            domain_focus: 중점 분석 요소
-            
         Returns:
             서론 섹션 내용
         """
@@ -135,13 +128,6 @@ class ReportGenerator:
                               domain_info: str, domain_focus: str) -> str:
         """
         서비스 개요 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            service_analysis: 서비스 분석 정보
-            domain_info: 도메인 정보
-            domain_focus: 중점 분석 요소
-            
         Returns:
             서비스 개요 섹션 내용
         """
@@ -165,14 +151,6 @@ class ReportGenerator:
                                      domain_focus: str) -> str:
         """
         리스크 평가 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            service_analysis: 서비스 분석 정보
-            risk_assessment: 윤리 리스크 평가 결과
-            domain_info: 도메인 정보
-            domain_focus: 중점 분석 요소
-            
         Returns:
             리스크 평가 섹션 내용
         """
@@ -208,12 +186,6 @@ class ReportGenerator:
                                 domain_info: str) -> str:
         """
         규정 준수 상태 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            risk_assessment: 윤리 리스크 평가 결과
-            domain_info: 도메인 정보
-            
         Returns:
             규정 준수 상태 섹션 내용
         """
@@ -238,16 +210,7 @@ class ReportGenerator:
                                      risk_assessment: Dict[str, Any], recommendations: Dict[str, Any],
                                      domain_info: str, domain_focus: str) -> str:
         """
-        개선 권고안 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            service_analysis: 서비스 분석 정보
-            risk_assessment: 윤리 리스크 평가 결과
-            recommendations: 개선 권고안
-            domain_info: 도메인 정보
-            domain_focus: 중점 분석 요소
-            
+        개선 권고안 섹션 작성   
         Returns:
             권고안 섹션 내용
         """
@@ -275,14 +238,6 @@ class ReportGenerator:
                          domain_focus: str) -> str:
         """
         결론 섹션 작성
-        
-        Args:
-            service_name: 서비스 이름
-            risk_assessment: 윤리 리스크 평가 결과
-            recommendations: 개선 권고안
-            domain_info: 도메인 정보
-            domain_focus: 중점 분석 요소
-            
         Returns:
             결론 섹션 내용
         """
@@ -307,13 +262,6 @@ class ReportGenerator:
                             recommendations: Dict[str, Any], domain_info: str) -> str:
         """
         보고서에 포함할 시각화 요소 제안
-        
-        Args:
-            service_name: 서비스 이름
-            risk_assessment: 윤리 리스크 평가 결과
-            recommendations: 개선 권고안
-            domain_info: 도메인 정보
-            
         Returns:
             시각화 제안 내용
         """
@@ -339,18 +287,6 @@ class ReportGenerator:
                            conclusion: str, visualization_suggestions: str) -> str:
         """
         모든 섹션을 종합하여 최종 보고서 생성
-        
-        Args:
-            service_name: 서비스 이름
-            executive_summary: 요약
-            introduction: 서론
-            service_overview: 서비스 개요
-            risk_assessment_section: 리스크 평가 섹션
-            compliance_section: 규정 준수 상태 섹션
-            recommendations_section: 권고안 섹션
-            conclusion: 결론
-            visualization_suggestions: 시각화 제안
-            
         Returns:
             최종 보고서 내용
         """
@@ -373,12 +309,7 @@ class ReportGenerator:
 
     def save_report_to_file(self, report_content: str, service_name: str) -> str:
         """
-        생성된 보고서를 파일로 저장
-        
-        Args:
-            report_content: 보고서 내용
-            service_name: 서비스 이름
-            
+        생성된 보고서를 파일로 저장  및 PDF저장
         Returns:
             저장된 파일 경로
         """
@@ -386,16 +317,73 @@ class ReportGenerator:
         output_dir = "outputs/reports"
         os.makedirs(output_dir, exist_ok=True)
         
-        # 파일명 생성 (현재 날짜/시간 포함)
+        # 타임스탬프 생성 (현재 날짜/시간 포함)
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{service_name.replace(' ', '_')}_{timestamp}.md"
-        filepath = os.path.join(output_dir, filename)
+        service_name_safe = service_name.replace(' ', '_')
         
-        # 파일에 보고서 내용 저장
-        with open(filepath, "w", encoding="utf-8") as f:
+         # 마크다운 파일 저장
+        md_filename = f"{service_name_safe}_{timestamp}.md"
+        md_filepath = os.path.join(output_dir, md_filename)
+        
+        with open(md_filepath, "w", encoding="utf-8") as f:
             f.write(report_content)
         
-        return filepath
+        # PDF 파일 생성
+        pdf_filename = f"{service_name_safe}_{timestamp}.pdf"
+        pdf_filepath = os.path.join(output_dir, pdf_filename)
+    
+        try:
+            # weasyprint 사용 (더 안정적)
+            import markdown
+            from weasyprint import HTML
+            
+            # 마크다운을 HTML로 변환
+            html_content = markdown.markdown(
+                report_content,
+                extensions=['tables', 'fenced_code']
+            )
+            
+            # 스타일을 추가한 HTML 생성
+            styled_html = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>{service_name} 윤리성 리스크 진단 보고서</title>
+                <style>
+                    @page {{ size: A4; margin: 2cm; }}
+                    body {{ font-family: Arial, sans-serif; line-height: 1.6; }}
+                    h1 {{ color: #2c3e50; border-bottom: 1px solid #3498db; padding-bottom: 10px; }}
+                    h2 {{ color: #2980b9; margin-top: 20px; }}
+                    h3 {{ color: #3498db; }}
+                    table {{ border-collapse: collapse; width: 100%; margin: 15px 0; }}
+                    th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                    th {{ background-color: #f2f2f2; }}
+                    .risk-high {{ color: #e74c3c; font-weight: bold; }}
+                    .risk-medium {{ color: #f39c12; font-weight: bold; }}
+                    .risk-low {{ color: #27ae60; font-weight: bold; }}
+                    .footer {{ margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; }}
+                </style>
+            </head>
+            <body>
+                {html_content}
+                <div class="footer">
+                    <p>이 보고서는 AI 윤리성 리스크 진단 시스템에 의해 생성되었습니다.</p>
+                    <p>생성일: {datetime.datetime.now().strftime("%Y년 %m월 %d일")}</p>
+                </div>
+            </body>
+            </html>
+            """
+            
+            # HTML을 PDF로 변환
+            HTML(string=styled_html).write_pdf(pdf_filepath)
+            print(f"✅ PDF 보고서가 생성되었습니다: {pdf_filepath}")
+        except Exception as e:
+            print(f"⚠️ PDF 생성 실패: {str(e)}")
+        
+        # 파일 경로 반환 (기존 코드와 호환성 유지)
+        return md_filepath
+                        
 
     def generate(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -486,6 +474,10 @@ class ReportGenerator:
         print("💾 보고서 파일 저장 중...")
         report_filepath = self.save_report_to_file(final_report, service_name)
         
+        # PDF 파일 경로 추론 (마크다운 파일 경로에서 확장자만 변경)
+        pdf_filepath = report_filepath.replace('.md', '.pdf')
+        pdf_exists = os.path.exists(pdf_filepath)
+        
         # 보고서 생성 정보 저장
         report_generation = {
             "report_structure": report_structure.get("structure", ""),
@@ -498,13 +490,18 @@ class ReportGenerator:
             "conclusion": conclusion,
             "visualization_suggestions": visualization_suggestions,
             "final_report": final_report,
-            "report_filepath": report_filepath
+            "report_filepath": report_filepath,
+            "pdf_filepath": pdf_filepath if pdf_exists else None
         }
         
         # 결과 로그
+        # print(f"\n✅ 윤리 리스크 진단 보고서가 생성되었습니다.")
+        # print(f"📄 보고서 파일: {report_filepath}")
         print(f"\n✅ 윤리 리스크 진단 보고서가 생성되었습니다.")
-        print(f"📄 보고서 파일: {report_filepath}")
-        
+        print(f"📄 마크다운 보고서: {report_filepath}")
+        if pdf_exists:
+            print(f"📑 PDF 보고서: {pdf_filepath}")
+                
         # 상태 업데이트
         state["report_generation"] = report_generation
         

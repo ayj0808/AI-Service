@@ -83,7 +83,6 @@ class Recommender:
                                 initial_recommendations: Dict[str, Any]) -> Dict[str, Any]:
         """
         생성된 권고안에 우선순위 부여
-            
         Returns:
             우선순위가 부여된 권고안
         """
@@ -180,11 +179,6 @@ class Recommender:
                          score: int, domain_info: str) -> Dict[str, Any]:
         """
         특정 윤리적 측면에 대한 모범 사례 제공
-        
-        Args:
-            aspect: 윤리적 측면(bias, privacy 등)
-            score: 현재 리스크 점수
-            
         Returns:
             모범 사례 정보
         """
@@ -220,9 +214,6 @@ class Recommender:
                                    domain_info: str) -> Dict[str, Any]:
         """
         특정 윤리적 측면에 대한 맞춤형 개선 전략 생성
-        
-        Args:
-            risk_details: 해당 측면의 리스크 상세 설명
         Returns:
             맞춤형 개선 전략
         """
@@ -322,10 +313,6 @@ class Recommender:
     def recommend(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """
         전체 권고안 생성 프로세스 실행
-        
-        Args:
-            state: 현재 시스템 상태
-            
         Returns:
             업데이트된 시스템 상태
         """
@@ -419,9 +406,9 @@ class Recommender:
         
         # 결과 로그
         print(f"\n✅ 윤리 개선 권고안 생성이 완료되었습니다.")
-        print(f"📊 높은 우선순위 권고안: {len(recommendations['high_priority'])}개")
-        print(f"📊 중간 우선순위 권고안: {len(recommendations['medium_priority'])}개")
-        print(f"📊 낮은 우선순위 권고안: {len(recommendations['low_priority'])}개")
+        # print(f"📊 높은 우선순위 권고안: {len(recommendations['high_priority'])}개")
+        # print(f"📊 중간 우선순위 권고안: {len(recommendations['medium_priority'])}개")
+        # print(f"📊 낮은 우선순위 권고안: {len(recommendations['low_priority'])}개")
         
         # 상태 업데이트
         state["recommendations"] = recommendations

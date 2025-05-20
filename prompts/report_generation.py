@@ -166,6 +166,7 @@ FINAL_REPORT_ASSEMBLY_PROMPT = ChatPromptTemplate.from_messages([
               "---개선 권고안---\n{recommendations_section}\n\n"
               "---결론---\n{conclusion}\n\n"
               "---시각화 제안---\n{visualization_suggestions}\n\n"
+              "각 리스크 평가에 대한 평균 점수를 결론 옆에 표시해주세요"
               "이 내용을 바탕으로 일관성 있고 전문적인 완전한 보고서를 생성하세요. "
               "필요한 경우 연결 문구를 추가하거나 내용을 조정하여 보고서 전체가 "
               "논리적 흐름을 갖도록 해주세요.")
