@@ -67,6 +67,9 @@ report_generation: 최종 보고서 구조와 주요 강조점
 
 # Architecture
 
+![image](https://github.com/user-attachments/assets/d63a1251-85f7-4ab5-bc93-4557539eeea0)
+
+
 [서비스 분석 에이전트] → [윤리 리스크 진단 에이전트] → [개선안 제안 에이전트] → [리포트 작성 에이전트]
           ↑                         |
           └─────────────────────────┘
