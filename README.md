@@ -80,10 +80,8 @@ python app.py
           ↑                         |
           └─────────────────────────┘
                  피드백 루프
-```
 
 ## Directory Structure
-
 ```
 AI-Service/
 ├── README.md                 # 프로젝트 설명
