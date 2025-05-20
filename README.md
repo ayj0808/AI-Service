@@ -80,8 +80,10 @@ python app.py
           ↑                         |
           └─────────────────────────┘
                  피드백 루프
-                 
-# Directory Structure
+```
+
+## Directory Structure
+
 ```
 AI-Service/
 ├── README.md                 # 프로젝트 설명
@@ -114,49 +116,12 @@ AI-Service/
 │       ├── healthcare.json         # 의료 분야 특화 정보
 │       ├── finance.json            # 금융 분야 특화 정보
 │       └── education.json          # 교육 분야 특화 정보
-└── outputs/                 # 출력 결과 저장
-
-agents/ 디렉토리
-agents/
-├── __init__.py
-├── service_analyzer.py      # 서비스 분석 에이전트
-├── risk_assessor.py         # 윤리 리스크 진단 에이전트
-├── recommender.py           # 개선안 제안 에이전트
-└── report_generator.py      # 리포트 작성 에이전트
-
-prompts/ 디렉토리
-prompts/
-├── __init__.py
-├── service_analysis.py      # 서비스 분석 프롬프트
-├── risk_assessment.py       # 리스크 평가 프롬프트
-├── recommendations.py       # 권고사항 프롬프트
-└── report_generation.py     # 보고서 생성 프롬프트
-
-tools/ 디렉토리
-tools/
-├── __init__.py
-├── guideline_rag.py         # 윤리 가이드라인 검색 도구
-├── risk_calculator.py       # 리스크 평가 계산기
-├── domain_adapter.py        # 도메인 특화 어댑터
-├── report_formatter.py      # 보고서 포맷팅 도구
-└── web_search.py            # 웹 검색 기능
-
-data/ 디렉토리
-data/
-├── guidelines/
-│   ├── oecd_ai_ethics.txt   # OECD AI 윤리 가이드라인
-│   └── risk_framework.txt   # AI 리스크 관리 프레임워크
-└── domain_info/
-    ├── healthcare.json      # 의료 분야 특화 정보
-    ├── finance.json         # 금융 분야 특화 정보
-    └── education.json       # 교육 분야 특화 정보
-
-outputs/ 디렉토리
-outputs/
-├── reports/                 # 생성된 보고서 (마크다운, PDF)
-└── visualizations/          
+└── outputs/                  # 출력 결과 저장
+    ├── reports/              # 생성된 보고서 (마크다운, PDF)
+    └── visualizations/       # 시각화 자료
 ```
 
+## 테스트 권장 AI 서비스
 
 ## 테스트 권장 AI 서비스
 
