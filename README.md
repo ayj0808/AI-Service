@@ -76,6 +76,7 @@ report_generation: 최종 보고서 구조와 주요 강조점
                  피드백 루프
                  
 # Directory Structure
+'''
 AI-Service/
 ├── README.md                 # 프로젝트 설명
 ├── app.py                    # 메인 실행 파일
@@ -110,7 +111,8 @@ AI-Service/
 └── outputs/                 # 출력 결과 저장
     ├── reports/             # 생성된 보고서 (마크다운, PDF)
     └── visualizations/
-    
+'''
+
 테스트 권장 AI 서비스
 교육 도메인
 Cognii: NLP 기반 가상 학습 도우미, 작문 과제에 실시간 피드백 제공
